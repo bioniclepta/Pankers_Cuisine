@@ -1,6 +1,7 @@
 package com.panker.pankerscuisine;
 
 import com.mojang.logging.LogUtils;
+import com.panker.pankerscuisine.item.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +21,8 @@ public class Pankers_Cuisine {
 
     public Pankers_Cuisine() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
