@@ -22,15 +22,15 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Pankers_Cuisine.MOD_ID);
 
-    public static final RegistryObject<Block> PEPPERONIPIZZAWHOLE_BLOCK = registerBlock("pepperoni_pizza_whole_block",
+    public static final RegistryObject<Block> PEPPERONIPIZZAWHOLE_BLOCK = BLOCKS.register("pepperoni_pizza_whole_block",
             () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
-                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+                    .requiresCorrectToolForDrops().noOcclusion()));
     public static final RegistryObject<Block> CHEESEPIZZAWHOLE_BLOCK = registerBlock("cheese_pizza_whole_block",
-            () -> new PizzaWholeBlock(BlockBehaviour.Properties.of(Material.CAKE)
-                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
-    public static final RegistryObject<Block> MARGARITAPIZZAWHOLE_BLOCK = registerBlock("margarita_pizza_whole_block",
-            () -> new PizzaWholeBlock(BlockBehaviour.Properties.of(Material.CAKE)
-                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
+                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+    public static final RegistryObject<Block> MARGHERITAPIZZAWHOLE_BLOCK = registerBlock("margherita_pizza_whole_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
+                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

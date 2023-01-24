@@ -17,16 +17,16 @@ public class ModItems {
 
     public static final RegistryObject<Item> PEPPERONIPIZZAWHOLE = ITEMS.register("pepperoni_pizza_whole",
             () -> new ItemNameBlockItem(ModBlocks.PEPPERONIPIZZAWHOLE_BLOCK.get(),
-                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB).stacksTo(1)));
     public static final RegistryObject<Item> PEPPERONIPIZZASLICE = ITEMS.register("pepperoni_pizza_slice",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
     public static final RegistryObject<Item> CHEESEPIZZAWHOLE = ITEMS.register("cheese_pizza_whole",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
     public static final RegistryObject<Item> CHEESEPIZZASLICE = ITEMS.register("cheese_pizza_slice",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
-    public static final RegistryObject<Item> MARGARITAPIZZAWHOLE = ITEMS.register("margarita_pizza_whole",
+    public static final RegistryObject<Item> MARGHERITAPIZZAWHOLE = ITEMS.register("margherita_pizza_whole",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
-    public static final RegistryObject<Item> MARGARITAPIZZASLICE = ITEMS.register("margarita_pizza_slice",
+    public static final RegistryObject<Item> MARGHERITAPIZZASLICE = ITEMS.register("margherita_pizza_slice",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
 
     public static void register(IEventBus eventBus) {
