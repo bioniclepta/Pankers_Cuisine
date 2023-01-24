@@ -15,7 +15,7 @@ public class ModItems {
 
     // Items
     public static final RegistryObject<Item> PIZZACUTTER = ITEMS.register("pizzacutter",
-            () -> new SwordItem(Tiers.IRON, 2, 2f,
+            () -> new SwordItem(Tiers.WOOD, 2, 2f,
                     new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB).stacksTo(1)));
 
     // Block item references
