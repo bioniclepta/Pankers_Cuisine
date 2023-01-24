@@ -1,12 +1,14 @@
 package com.panker.pankerscuisine.block;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
+import com.panker.pankerscuisine.block.custom.PizzaWholeBlock;
 import com.panker.pankerscuisine.item.ModCreativeModeTab;
 import com.panker.pankerscuisine.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,14 +23,14 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, Pankers_Cuisine.MOD_ID);
 
     public static final RegistryObject<Block> PEPPERONIPIZZAWHOLE_BLOCK = registerBlock("pepperoni_pizza_whole_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
-                    .strength(1).requiresCorrectToolForDrops()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+            () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
+                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
     public static final RegistryObject<Block> CHEESEPIZZAWHOLE_BLOCK = registerBlock("cheese_pizza_whole_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
-                    .strength(1).requiresCorrectToolForDrops()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+            () -> new PizzaWholeBlock(BlockBehaviour.Properties.of(Material.CAKE)
+                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
     public static final RegistryObject<Block> MARGARITAPIZZAWHOLE_BLOCK = registerBlock("margarita_pizza_whole_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
-                    .strength(1).requiresCorrectToolForDrops()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+            () -> new PizzaWholeBlock(BlockBehaviour.Properties.of(Material.CAKE)
+                    .strength(1).requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
