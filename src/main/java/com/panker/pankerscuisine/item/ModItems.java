@@ -56,6 +56,14 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
                     .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
 
+    // Seeds
+    public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.TOMATO_CROP.get(),
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+    public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds",
+            () -> new ItemNameBlockItem(ModBlocks.LETTUCE_CROP.get(),
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

@@ -8,10 +8,14 @@
   "item.pankerscuisine.cheeseburger": "Cheeseburger",
   "item.pankerscuisine.cheese": "Cheese",
   "item.pankerscuisine.lettuce": "Lettuce",
+  "item.pankerscuisine.lettuce_seeds": "Lettuce Seeds",
   "item.pankerscuisine.tomato": "Tomato",
+  "item.pankerscuisine.tomato_seeds": "Tomato Seeds",
   "item.pankerscuisine.pizzacutter": "Pizza Cutter",
 
   "block.pankerscuisine.pepperoni_pizza_whole_block": "Pepperoni Pizza",
+  "block.pankerscuisine.lettuce_crop": "Lettuce Crop",
+  "block.pankerscuisine.tomato_crop": "Tomato Crop",
 
 
   "itemGroup.pankerscuisinetab": "Panker's Cuisine"

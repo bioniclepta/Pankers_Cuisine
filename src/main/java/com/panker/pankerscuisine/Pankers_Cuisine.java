@@ -3,6 +3,9 @@ package com.panker.pankerscuisine;
 import com.mojang.logging.LogUtils;
 import com.panker.pankerscuisine.block.ModBlocks;
 import com.panker.pankerscuisine.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,7 +44,8 @@ public class Pankers_Cuisine {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LETTUCE_CROP.get(), RenderType.cutout());
         }
     }
 }
