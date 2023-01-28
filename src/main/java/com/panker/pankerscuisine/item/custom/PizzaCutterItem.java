@@ -5,7 +5,10 @@ import com.panker.pankerscuisine.block.ModBlocks;
 import com.panker.pankerscuisine.block.custom.PizzaWholeBlock;
 import com.panker.pankerscuisine.item.ModItems;
 import com.panker.pankerscuisine.tag.ModTags;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
@@ -16,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -23,7 +27,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 public class PizzaCutterItem extends DiggerItem {
@@ -41,6 +47,17 @@ public class PizzaCutterItem extends DiggerItem {
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, (user) -> user.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+        if(Screen.hasShiftDown()) {
+            components.add(Component.literal("Right click on a pizza block to get pizza slices!").withStyle(ChatFormatting.AQUA));
+        } else {
+            components.add(Component.literal("Press SHIFT for more info").withStyle(ChatFormatting.YELLOW));
+        }
+
+        super.appendHoverText(stack, level, components, flag);
     }
 
 
