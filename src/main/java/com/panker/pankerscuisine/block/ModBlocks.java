@@ -24,7 +24,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> PEPPERONIPIZZAWHOLE_BLOCK = BLOCKS.register("pepperoni_pizza_whole_block",
             () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
-                    .requiresCorrectToolForDrops().noOcclusion()));
+                    .requiresCorrectToolForDrops().noOcclusion(), ModItems.PEPPERONIPIZZASLICE, ModItems.PEPPERONIPIZZAWHOLE));
     public static final RegistryObject<Block> CHEESEPIZZAWHOLE_BLOCK = registerBlock("cheese_pizza_whole_block",
             () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
                     .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);

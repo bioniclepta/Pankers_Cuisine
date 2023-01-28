@@ -2,6 +2,7 @@ package com.panker.pankerscuisine.item;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
 import com.panker.pankerscuisine.block.ModBlocks;
+import com.panker.pankerscuisine.item.custom.PizzaCutterItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,8 +16,8 @@ public class ModItems {
 
     // Items
     public static final RegistryObject<Item> PIZZACUTTER = ITEMS.register("pizzacutter",
-            () -> new SwordItem(Tiers.WOOD, 2, 2f,
-                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB).stacksTo(1)));
+            () -> new PizzaCutterItem(Tiers.IRON, 0.5f, -2.0f,
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
 
     // Block item references
     public static final RegistryObject<Item> PEPPERONIPIZZAWHOLE = ITEMS.register("pepperoni_pizza_whole",
