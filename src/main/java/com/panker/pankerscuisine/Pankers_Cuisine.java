@@ -3,6 +3,9 @@ package com.panker.pankerscuisine;
 import com.mojang.logging.LogUtils;
 import com.panker.pankerscuisine.block.ModBlocks;
 import com.panker.pankerscuisine.item.ModItems;
+import com.panker.pankerscuisine.painting.ModPaintings;
+import com.panker.pankerscuisine.tag.ModTags;
+import com.panker.pankerscuisine.villager.ModVillagers;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -28,6 +31,8 @@ public class Pankers_Cuisine {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModVillagers.register(modEventBus);
+        ModPaintings.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -35,7 +40,9 @@ public class Pankers_Cuisine {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            ModVillagers.registerPOIs();
+        });
     }
 
 

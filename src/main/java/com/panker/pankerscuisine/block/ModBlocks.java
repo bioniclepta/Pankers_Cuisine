@@ -37,6 +37,9 @@ public class ModBlocks {
             () -> new TomatoCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> LETTUCE_CROP = BLOCKS.register("lettuce_crop",
             () -> new LettuceCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
+    public static final RegistryObject<Block> OVEN_BLOCK = registerBlock("oven_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
 
 
 

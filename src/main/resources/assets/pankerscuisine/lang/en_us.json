@@ -14,9 +14,11 @@
   "item.pankerscuisine.pizzacutter": "Pizza Cutter",
 
   "block.pankerscuisine.pepperoni_pizza_whole_block": "Pepperoni Pizza",
+  "block.pankerscuisine.oven_block": "Oven",
   "block.pankerscuisine.lettuce_crop": "Lettuce Crop",
   "block.pankerscuisine.tomato_crop": "Tomato Crop",
 
 
-  "itemGroup.pankerscuisinetab": "Panker's Cuisine"
+  "itemGroup.pankerscuisinetab": "Panker's Cuisine",
+  "entity.minecraft.villager.pankerscuisine.master_chef": "Master Chef"
 }
