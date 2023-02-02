@@ -1,10 +1,10 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "pankerscuisine:block/main_pepperoni_pizza",
+    "0": "pankerscuisine:block/main_cheese_pizza",
     "1": "pankerscuisine:block/crust_long",
     "2": "pankerscuisine:block/crust_short",
-    "particle": "pankerscuisine:block/main_pepperoni_pizza"
+    "particle": "pankerscuisine:block/main_cheese_pizza"
   },
   "elements": [
     {

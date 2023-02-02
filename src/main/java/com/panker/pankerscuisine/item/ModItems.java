@@ -25,9 +25,13 @@ public class ModItems {
                     new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
                             .stacksTo(1)));
     public static final RegistryObject<Item> CHEESEPIZZAWHOLE = ITEMS.register("cheese_pizza_whole",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+            () -> new ItemNameBlockItem(ModBlocks.CHEESEPIZZAWHOLE_BLOCK.get(),
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                            .stacksTo(1)));
     public static final RegistryObject<Item> MARGHERITAPIZZAWHOLE = ITEMS.register("margherita_pizza_whole",
-            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+            () -> new ItemNameBlockItem(ModBlocks.MARGHERITAPIZZAWHOLE_BLOCK.get(),
+                    new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                            .stacksTo(1)));
 
     // Pizza's
     public static final RegistryObject<Item> PEPPERONIPIZZASLICE = ITEMS.register("pepperoni_pizza_slice",
@@ -40,10 +44,13 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
                     .stacksTo(16).food(new FoodProperties.Builder().nutrition(4).saturationMod(4f).build())));
 
-    // Burgers
+    // Cooked Foods
     public static final RegistryObject<Item> CHEESEBURGER = ITEMS.register("cheeseburger",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
                     .stacksTo(16).food(new FoodProperties.Builder().nutrition(11).saturationMod(4f).build())));
+    public static final RegistryObject<Item> CINNAMON_BUN_COOKED = ITEMS.register("cinnamon_bun_cooked",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                    .stacksTo(16).food(new FoodProperties.Builder().nutrition(6).saturationMod(4f).build())));
 
     // Raw Ingredients
     public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese",
@@ -55,6 +62,17 @@ public class ModItems {
     public static final RegistryObject<Item> LETTUCE = ITEMS.register("lettuce",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
                     .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> PATTY_RAW = ITEMS.register("patty_raw",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                    .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> DOUGH = ITEMS.register("dough",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                    .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+
+    //Cooked Ingredients
+    public static final RegistryObject<Item> PATTY_COOKED = ITEMS.register("patty_cooked",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)
+                    .food(new FoodProperties.Builder().nutrition(3).saturationMod(2f).build())));
 
     // Seeds
     public static final RegistryObject<Item> TOMATO_SEEDS = ITEMS.register("tomato_seeds",

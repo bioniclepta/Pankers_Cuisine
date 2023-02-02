@@ -6,6 +6,10 @@
   "item.pankerscuisine.margherita_pizza_whole": "Whole Margherita Pizza",
   "item.pankerscuisine.margherita_pizza_slice": "Slice of Margherita Pizza",
   "item.pankerscuisine.cheeseburger": "Cheeseburger",
+  "item.pankerscuisine.dough": "Raw Dough",
+  "item.pankerscuisine.patty_raw": "Raw Patty",
+  "item.pankerscuisine.patty_cooked": "Cooked Patty",
+  "item.pankerscuisine.cinnamon_bun_cooked": "Cinnamon Bun",
   "item.pankerscuisine.cheese": "Cheese",
   "item.pankerscuisine.lettuce": "Lettuce",
   "item.pankerscuisine.lettuce_seeds": "Lettuce Seeds",
@@ -14,7 +18,9 @@
   "item.pankerscuisine.pizzacutter": "Pizza Cutter",
 
   "block.pankerscuisine.pepperoni_pizza_whole_block": "Pepperoni Pizza",
-  "block.pankerscuisine.oven_block": "Oven",
+  "block.pankerscuisine.cheese_pizza_whole_block": "Cheese Pizza",
+  "block.pankerscuisine.margherita_pizza_whole_block": "Margherita Pizza",
+  "block.pankerscuisine.brick_oven": "Brick Oven",
   "block.pankerscuisine.lettuce_crop": "Lettuce Crop",
   "block.pankerscuisine.tomato_crop": "Tomato Crop",
 

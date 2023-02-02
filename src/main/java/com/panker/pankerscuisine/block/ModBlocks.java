@@ -1,6 +1,7 @@
 package com.panker.pankerscuisine.block;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
+import com.panker.pankerscuisine.block.custom.BrickOvenBlock;
 import com.panker.pankerscuisine.block.custom.LettuceCropBlock;
 import com.panker.pankerscuisine.block.custom.PizzaWholeBlock;
 import com.panker.pankerscuisine.block.custom.TomatoCropBlock;
@@ -24,22 +25,27 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Pankers_Cuisine.MOD_ID);
 
+    // Pizza Blocks
     public static final RegistryObject<Block> PEPPERONIPIZZAWHOLE_BLOCK = BLOCKS.register("pepperoni_pizza_whole_block",
             () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
                     .requiresCorrectToolForDrops().noOcclusion(), ModItems.PEPPERONIPIZZASLICE, ModItems.PEPPERONIPIZZAWHOLE));
-    public static final RegistryObject<Block> CHEESEPIZZAWHOLE_BLOCK = registerBlock("cheese_pizza_whole_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
-                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
-    public static final RegistryObject<Block> MARGHERITAPIZZAWHOLE_BLOCK = registerBlock("margherita_pizza_whole_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CAKE)
-                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+    public static final RegistryObject<Block> CHEESEPIZZAWHOLE_BLOCK = BLOCKS.register("cheese_pizza_whole_block",
+            () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
+                    .requiresCorrectToolForDrops().noOcclusion(), ModItems.CHEESEPIZZASLICE, ModItems.CHEESEPIZZAWHOLE));
+    public static final RegistryObject<Block> MARGHERITAPIZZAWHOLE_BLOCK = BLOCKS.register("margherita_pizza_whole_block",
+            () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
+                    .requiresCorrectToolForDrops().noOcclusion(), ModItems.MARGHERITAPIZZASLICE, ModItems.MARGHERITAPIZZAWHOLE));
+
+    public static final RegistryObject<Block> BRICK_OVEN = registerBlock("brick_oven",
+            () -> new BrickOvenBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+
+    // Crop Blocks
     public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomato_crop",
             () -> new TomatoCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> LETTUCE_CROP = BLOCKS.register("lettuce_crop",
             () -> new LettuceCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
-    public static final RegistryObject<Block> OVEN_BLOCK = registerBlock("oven_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
-                    .requiresCorrectToolForDrops().noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+
 
 
 

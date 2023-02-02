@@ -2,10 +2,15 @@ package com.panker.pankerscuisine;
 
 import com.mojang.logging.LogUtils;
 import com.panker.pankerscuisine.block.ModBlocks;
+import com.panker.pankerscuisine.block.entity.BrickOvenBlockEntity;
+import com.panker.pankerscuisine.block.entity.ModBlockEntities;
 import com.panker.pankerscuisine.item.ModItems;
 import com.panker.pankerscuisine.painting.ModPaintings;
+import com.panker.pankerscuisine.screen.BrickOvenScreen;
+import com.panker.pankerscuisine.screen.ModMenuTypes;
 import com.panker.pankerscuisine.tag.ModTags;
 import com.panker.pankerscuisine.villager.ModVillagers;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
@@ -33,6 +38,8 @@ public class Pankers_Cuisine {
         ModBlocks.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModPaintings.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -51,8 +58,7 @@ public class Pankers_Cuisine {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.TOMATO_CROP.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.LETTUCE_CROP.get(), RenderType.cutout());
+            MenuScreens.register(ModMenuTypes.BRICK_OVEN_MENU.get(), BrickOvenScreen::new);
         }
     }
 }

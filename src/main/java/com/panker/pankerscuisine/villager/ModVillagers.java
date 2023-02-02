@@ -21,7 +21,7 @@ public class ModVillagers {
             DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, Pankers_Cuisine.MOD_ID);
 
     public static final RegistryObject<PoiType> OVEN_BLOCK_POI = POI_TYPES.register("oven_block_poi",
-            () -> new PoiType(ImmutableSet.copyOf(ModBlocks.OVEN_BLOCK.get().getStateDefinition().getPossibleStates()),
+            () -> new PoiType(ImmutableSet.copyOf(ModBlocks.PEPPERONIPIZZAWHOLE_BLOCK.get().getStateDefinition().getPossibleStates()),
                     1, 1));
 
     public static final RegistryObject<VillagerProfession> MASTER_CHEF = VILLAGER_PROFESSIONS.register("master_chef",

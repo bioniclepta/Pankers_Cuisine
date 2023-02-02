@@ -2,5 +2,6 @@
   "parent": "minecraft:block/cross",
   "textures": {
     "cross": "pankerscuisine:block/lettuce_stage3"
-  }
+  },
+  "render_type": "cutout"
 }
