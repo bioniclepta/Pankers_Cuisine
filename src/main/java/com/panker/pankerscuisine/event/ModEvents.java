@@ -1,7 +1,7 @@
 package com.panker.pankerscuisine.event;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.item.ModItems;
+import com.panker.pankerscuisine.common.registry.ModItems;
 import com.panker.pankerscuisine.villager.ModVillagers;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerProfession;

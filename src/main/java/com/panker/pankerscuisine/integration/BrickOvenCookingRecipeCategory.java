@@ -1,8 +1,8 @@
 package com.panker.pankerscuisine.integration;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.block.ModBlocks;
-import com.panker.pankerscuisine.recipe.BrickOvenRecipe;
+import com.panker.pankerscuisine.common.registry.ModBlocks;
+import com.panker.pankerscuisine.data.recipe.BrickOvenRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -11,12 +11,9 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 
 public class BrickOvenCookingRecipeCategory implements IRecipeCategory<BrickOvenRecipe> {
 

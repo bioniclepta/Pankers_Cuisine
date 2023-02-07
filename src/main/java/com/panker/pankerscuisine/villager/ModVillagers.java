@@ -2,7 +2,7 @@ package com.panker.pankerscuisine.villager;
 
 import com.google.common.collect.ImmutableSet;
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.block.ModBlocks;
+import com.panker.pankerscuisine.common.registry.ModBlocks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;

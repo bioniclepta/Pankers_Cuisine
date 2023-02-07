@@ -1,8 +1,8 @@
 package com.panker.pankerscuisine.integration;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.recipe.BrickOvenRecipe;
-import com.panker.pankerscuisine.recipe.ModRecipeTypes;
+import com.panker.pankerscuisine.data.recipe.BrickOvenRecipe;
+import com.panker.pankerscuisine.common.registry.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
