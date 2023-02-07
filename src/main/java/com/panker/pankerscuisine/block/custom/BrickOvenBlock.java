@@ -1,9 +1,10 @@
 package com.panker.pankerscuisine.block.custom;
 
 import com.panker.pankerscuisine.block.entity.BrickOvenBlockEntity;
-import com.panker.pankerscuisine.block.entity.ModBlockEntities;
+import com.panker.pankerscuisine.block.entity.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,14 +60,17 @@ public class BrickOvenBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if(pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if(blockEntity instanceof BrickOvenBlockEntity) {
-                ((BrickOvenBlockEntity) blockEntity).drops();
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            BlockEntity tileEntity = level.getBlockEntity(pos);
+            if (tileEntity instanceof BrickOvenBlockEntity cookingPotEntity) {
+                Containers.dropContents(level, pos, cookingPotEntity.getDroppableInventory());
+                cookingPotEntity.getUsedRecipesAndPopExperience(level, Vec3.atCenterOf(pos));
+                level.updateNeighbourForOutputSignal(pos, this);
             }
+
+            super.onRemove(state, level, pos, newState, isMoving);
         }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override
@@ -90,8 +95,9 @@ public class BrickOvenBlock extends BaseEntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntities.BRICK_OVEN.get(),
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
+                                                                  BlockEntityType<T> type) {
+        return createTickerHelper(type, ModBlockEntityTypes.BRICK_OVEN_TILE_ENTITY.get(),
                 BrickOvenBlockEntity::tick);
     }
 }

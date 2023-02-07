@@ -1,0 +1,11 @@
+{
+  "type": "pankerscuisine:brick_oven_cooking",
+  "ingredients": [
+    {
+      "item": "pankerscuisine:lettuce"
+    }
+  ],
+  "output": {
+    "item": "pankerscuisine:pepperoni_pizza_whole"
+  }
+}

@@ -18,6 +18,12 @@ public class ModTags {
     // Pizza blocks drop pizza slices
     public static final TagKey<Block> DROPS_PIZZA_SLICE = modBlockTag("drops_pizza_slice");
 
+    // Blocks that can heat up cooking workstations.
+    public static final TagKey<Block> HEAT_SOURCES = modBlockTag("heat_sources");
+
+    // Blocks that can transfer heat to cooking workstations, if directly above a heat source.
+    public static final TagKey<Block> HEAT_CONDUCTORS = modBlockTag("heat_conductors");
+
     private static TagKey<Item> modItemTag(String path) {
         return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Pankers_Cuisine.MOD_ID + ":" + path));
     }

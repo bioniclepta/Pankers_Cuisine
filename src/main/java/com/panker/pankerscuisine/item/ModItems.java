@@ -14,10 +14,23 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Pankers_Cuisine.MOD_ID);
 
+    //Credit to farmers delight for the implementation
+    public static Item.Properties basicItem() {
+        return new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB);
+    }
+
+    //For foods:
+    //Drumsticks filled = nutrition / 2
+    //Saturation = saturationmod * 4
+
     // Items
     public static final RegistryObject<Item> PIZZACUTTER = ITEMS.register("pizzacutter",
             () -> new PizzaCutterItem(Tiers.IRON, 0.5f, -2.0f,
                     new Item.Properties().tab(ModCreativeModeTab.PANKERS_CUISINE_TAB)));
+
+    //Block Items
+    public static final RegistryObject<Item> BRICK_OVEN = ITEMS.register("brick_oven",
+            () -> new BlockItem(ModBlocks.BRICK_OVEN_BLOCK.get(), basicItem()));
 
     // Block item references
     public static final RegistryObject<Item> PEPPERONIPIZZAWHOLE = ITEMS.register("pepperoni_pizza_whole",

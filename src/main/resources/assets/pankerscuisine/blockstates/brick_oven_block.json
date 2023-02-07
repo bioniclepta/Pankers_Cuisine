@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "pankerscuisine:block/brick_oven_block"
+    },
+    "facing=south": {
+      "model": "pankerscuisine:block/brick_oven_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pankerscuisine:block/brick_oven_block",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "pankerscuisine:block/brick_oven_block",
+      "y": 90
+    }
+  }
+}

@@ -2,18 +2,16 @@ package com.panker.pankerscuisine;
 
 import com.mojang.logging.LogUtils;
 import com.panker.pankerscuisine.block.ModBlocks;
-import com.panker.pankerscuisine.block.entity.BrickOvenBlockEntity;
-import com.panker.pankerscuisine.block.entity.ModBlockEntities;
+import com.panker.pankerscuisine.block.entity.ModBlockEntityTypes;
 import com.panker.pankerscuisine.item.ModItems;
 import com.panker.pankerscuisine.painting.ModPaintings;
+import com.panker.pankerscuisine.recipe.ModRecipeSerializers;
+import com.panker.pankerscuisine.recipe.ModRecipeTypes;
 import com.panker.pankerscuisine.screen.BrickOvenScreen;
 import com.panker.pankerscuisine.screen.ModMenuTypes;
-import com.panker.pankerscuisine.tag.ModTags;
 import com.panker.pankerscuisine.villager.ModVillagers;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,7 +27,10 @@ public class Pankers_Cuisine {
 
     public static final String MOD_ID = "pankerscuisine";
 
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public static final RecipeBookType RECIPE_TYPE_BRICK_OVEN_COOKING = RecipeBookType.create("BRICK_OVEN_COOKING");
+
 
     public Pankers_Cuisine() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -38,8 +39,10 @@ public class Pankers_Cuisine {
         ModBlocks.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModPaintings.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipeSerializers.register(modEventBus);
+        ModRecipeTypes.register(modEventBus);
+        ModBlockEntityTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -61,4 +64,6 @@ public class Pankers_Cuisine {
             MenuScreens.register(ModMenuTypes.BRICK_OVEN_MENU.get(), BrickOvenScreen::new);
         }
     }
+
+
 }

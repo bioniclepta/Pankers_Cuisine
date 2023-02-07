@@ -36,9 +36,9 @@ public class ModBlocks {
             () -> new PizzaWholeBlock(BlockBehaviour.Properties.copy(Blocks.CAKE)
                     .requiresCorrectToolForDrops().noOcclusion(), ModItems.MARGHERITAPIZZASLICE, ModItems.MARGHERITAPIZZAWHOLE));
 
-    public static final RegistryObject<Block> BRICK_OVEN = registerBlock("brick_oven",
+    public static final RegistryObject<Block> BRICK_OVEN_BLOCK = BLOCKS.register("brick_oven_block",
             () -> new BrickOvenBlock(BlockBehaviour.Properties.of(Material.STONE)
-                    .strength(6f).noOcclusion()), ModCreativeModeTab.PANKERS_CUISINE_TAB);
+                    .strength(6f).noOcclusion()));
 
     // Crop Blocks
     public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomato_crop",
