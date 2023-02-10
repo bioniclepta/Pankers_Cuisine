@@ -1,6 +1,7 @@
 package com.panker.pankerscuisine.integration;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
+import com.panker.pankerscuisine.common.block.entity.container.BrickOvenOutputHandler;
 import com.panker.pankerscuisine.common.registry.ModBlocks;
 import com.panker.pankerscuisine.data.recipe.BrickOvenRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -11,9 +12,14 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.items.SlotItemHandler;
+
+import java.util.Arrays;
 
 public class BrickOvenCookingRecipeCategory implements IRecipeCategory<BrickOvenRecipe> {
 
@@ -42,7 +48,7 @@ public class BrickOvenCookingRecipeCategory implements IRecipeCategory<BrickOven
 
     @Override
     public IDrawable getBackground() {
-        return background;
+        return this.background;
     }
 
     @Override
@@ -52,8 +58,41 @@ public class BrickOvenCookingRecipeCategory implements IRecipeCategory<BrickOven
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BrickOvenRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 86, 15).addIngredients(recipe.getIngredients().get(0));
+        builder.addSlot(RecipeIngredientRole.INPUT, 26, 17).addIngredients(recipe.getIngredients().get(0));
+        /*
+        builder.addSlot(RecipeIngredientRole.INPUT, 44, 17).addIngredients(recipe.getIngredients().get(1));
+        builder.addSlot(RecipeIngredientRole.INPUT, 62, 17).addIngredients(recipe.getIngredients().get(2));
+        builder.addSlot(RecipeIngredientRole.INPUT, 26, 35).addIngredients(recipe.getIngredients().get(3));
+        builder.addSlot(RecipeIngredientRole.INPUT, 44, 35).addIngredients(recipe.getIngredients().get(4));
+        builder.addSlot(RecipeIngredientRole.INPUT, 62, 35).addIngredients(recipe.getIngredients().get(5));
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 86, 60).addItemStack(recipe.getResultItem());
+         */
+
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 23).addItemStack(recipe.getResultItem());
+
+        /*
+        NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();
+        ItemStack resultStack = recipe.getResultItem();
+
+        int startX = 8;
+        int startY = 18;
+        int inputStartX = 26;
+        int inputStartY = 17;
+        int borderSlotSize = 18;
+
+        for (int row = 0; row < 2; ++row) {
+            for (int column = 0; column < 3; ++column) {
+                int inputIndex = row * 3 + column;
+                builder.addSlot(RecipeIngredientRole.INPUT,
+                        inputStartX + (column * borderSlotSize),
+                        inputStartY + (row * borderSlotSize))
+                        .addItemStacks(Arrays.asList(recipeIngredients.get(inputIndex).getItems()));
+            }
+        }
+
+        builder.addSlot(RecipeIngredientRole.INPUT, 89, 63);
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 23).addItemStack(resultStack);
+
+         */
     }
 }

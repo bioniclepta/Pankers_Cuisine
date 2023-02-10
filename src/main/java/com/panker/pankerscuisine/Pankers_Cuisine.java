@@ -1,18 +1,14 @@
 package com.panker.pankerscuisine;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
-import com.panker.pankerscuisine.common.registry.ModBlocks;
-import com.panker.pankerscuisine.common.registry.ModBlockEntityTypes;
+import com.panker.pankerscuisine.common.registry.*;
 import com.panker.pankerscuisine.client.ClientSetup;
 import com.panker.pankerscuisine.common.CommonSetup;
 import com.panker.pankerscuisine.common.Configuration;
-import com.panker.pankerscuisine.common.registry.ModItems;
 import com.panker.pankerscuisine.common.painting.ModPaintings;
-import com.panker.pankerscuisine.common.registry.ModRecipeSerializers;
-import com.panker.pankerscuisine.common.registry.ModRecipeTypes;
-import com.panker.pankerscuisine.common.registry.ModMenuTypes;
 import com.panker.pankerscuisine.villager.ModVillagers;
-import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,7 +29,7 @@ public class Pankers_Cuisine {
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final RecipeBookType RECIPE_TYPE_BRICK_OVEN_COOKING = RecipeBookType.create("BRICK_OVEN_COOKING");
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(Pankers_Cuisine.MOD_ID)
     {
@@ -59,9 +55,8 @@ public class Pankers_Cuisine {
         ModVillagers.register(modEventBus);
         ModPaintings.register(modEventBus);
         ModMenuTypes.register(modEventBus);
-        ModRecipeSerializers.register(modEventBus);
-        ModRecipeTypes.register(modEventBus);
-        ModBlockEntityTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

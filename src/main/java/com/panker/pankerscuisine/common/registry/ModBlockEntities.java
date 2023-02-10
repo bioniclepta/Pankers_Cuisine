@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModBlockEntityTypes {
+public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Pankers_Cuisine.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<BrickOvenBlockEntity>> BRICK_OVEN_TILE_ENTITY = TILES.register("brick_oven_tile_entity",

@@ -80,6 +80,9 @@ public class ModItems {
     public static final RegistryObject<Item> DOUGH = ITEMS.register("dough",
             () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)
                     .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> CINNAMON_BUN_RAW = ITEMS.register("cinnamon_bun_raw",
+            () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)
+                    .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
 
     //Cooked Ingredients
     public static final RegistryObject<Item> PATTY_COOKED = ITEMS.register("patty_cooked",

@@ -1,7 +1,7 @@
 package com.panker.pankerscuisine.common.block.custom;
 
 import com.panker.pankerscuisine.common.block.entity.BrickOvenBlockEntity;
-import com.panker.pankerscuisine.common.registry.ModBlockEntityTypes;
+import com.panker.pankerscuisine.common.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,15 +61,12 @@ public class BrickOvenBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tileEntity = level.getBlockEntity(pos);
-            if (tileEntity instanceof BrickOvenBlockEntity cookingPotEntity) {
-                Containers.dropContents(level, pos, cookingPotEntity.getDroppableInventory());
-                cookingPotEntity.getUsedRecipesAndPopExperience(level, Vec3.atCenterOf(pos));
-                level.updateNeighbourForOutputSignal(pos, this);
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof BrickOvenBlockEntity) {
+                ((BrickOvenBlockEntity) blockEntity).drops();
             }
-
-            super.onRemove(state, level, pos, newState, isMoving);
         }
+        super.onRemove(state, level, pos, newState, isMoving);
     }
 
     @Override
@@ -97,7 +93,7 @@ public class BrickOvenBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
-        return createTickerHelper(type, ModBlockEntityTypes.BRICK_OVEN_TILE_ENTITY.get(),
+        return createTickerHelper(type, ModBlockEntities.BRICK_OVEN_TILE_ENTITY.get(),
                 BrickOvenBlockEntity::tick);
     }
 }

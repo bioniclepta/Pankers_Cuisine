@@ -2,10 +2,10 @@
   "type": "pankerscuisine:brick_oven_cooking",
   "ingredients": [
     {
-      "item": "pankerscuisine:lettuce"
+      "item": "pankerscuisine:cinnamon_bun_raw"
     }
   ],
   "output": {
-    "item": "pankerscuisine:pepperoni_pizza_whole"
+    "item": "pankerscuisine:cinnamon_bun_cooked"
   }
 }

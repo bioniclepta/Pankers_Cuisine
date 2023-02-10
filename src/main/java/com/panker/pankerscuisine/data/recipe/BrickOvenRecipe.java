@@ -4,115 +4,73 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.common.registry.ModItems;
-import com.panker.pankerscuisine.client.recipebook.BrickOvenRecipeBookTab;
-import com.panker.pankerscuisine.common.registry.ModRecipeSerializers;
-import com.panker.pankerscuisine.common.registry.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.EnumSet;
+import java.util.ArrayList;
+import java.util.List;
 
-//Credit to farmers delight for recipe implementations
-
-@SuppressWarnings("ClassCanBeRecord")
-public class BrickOvenRecipe implements Recipe<RecipeWrapper> {
+public class BrickOvenRecipe implements Recipe<SimpleContainer> {
+    private final ResourceLocation id;
+    private final ItemStack output;
+    private final NonNullList<Ingredient> recipeItems;
 
     public static final int INPUT_SLOTS = 6;
 
-    private final ResourceLocation id;
-    private final String group;
-    private final BrickOvenRecipeBookTab tab;
-    private final NonNullList<Ingredient> inputItems;
-    private final ItemStack output;
-    private final ItemStack container;
-    private final float experience;
-    private final int cookTime;
-
-    public BrickOvenRecipe(ResourceLocation id, String group, BrickOvenRecipeBookTab tab, NonNullList<Ingredient> inputItems,
-                           ItemStack output, ItemStack container, float experience, int cookTime) {
+    public BrickOvenRecipe(ResourceLocation id, ItemStack output,
+                                    NonNullList<Ingredient> recipeItems) {
         this.id = id;
-        this.group = group;
-        this.tab = tab;
-        this.inputItems = inputItems;
         this.output = output;
-        this.experience = experience;
-        this.cookTime = cookTime;
-
-        if (!container.isEmpty()) {
-            this.container = container;
-        } else if (!output.getCraftingRemainingItem().isEmpty()) {
-            this.container = output.getCraftingRemainingItem();
-        } else {
-            this.container = ItemStack.EMPTY;
-        }
+        this.recipeItems = recipeItems;
     }
 
-    public float getExperience() {
-        return this.experience;
-    }
-
+    //Farmer's delight implementation from their cooking pot
     @Override
-    public String getGroup() {
-        return this.group;
+    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+        if (pLevel.isClientSide()) {
+            return false;
+        }
+        int i = 0;
+
+        List<ItemStack> inputItems = new ArrayList<>();
+
+        for (int j = 0; j < 6; j++) {
+            ItemStack itemstack = pContainer.getItem(j);
+            if (!itemstack.isEmpty()) {
+                ++i;
+                inputItems.add(itemstack);
+            }
+        }
+
+        return i == this.recipeItems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputItems, this.recipeItems) != null;
     }
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
-        return inputItems;
+        return recipeItems;
+    }
+
+    @Override
+    public ItemStack assemble(SimpleContainer pContainer) {
+        return output;
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+        return true;
     }
 
     @Override
     public ItemStack getResultItem() {
-        return output;
-    }
-
-    public ItemStack getOutputContainer() {
-        return this.container;
-    }
-
-    @Nullable
-    public BrickOvenRecipeBookTab getRecipeBookTab() {
-        return this.tab;
-    }
-
-    @Override
-    public boolean matches(RecipeWrapper inv, Level level) {
-        java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
-        int i = 0;
-
-        for (int j = 0; j < INPUT_SLOTS; ++j) {
-            ItemStack itemstack = inv.getItem(j);
-            if (!itemstack.isEmpty()) {
-                ++i;
-                inputs.add(itemstack);
-            }
-        }
-        return i == this.inputItems.size() && net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs, this.inputItems) != null;
-    }
-
-    @Override
-    public ItemStack assemble(RecipeWrapper pContainer) {
-        return this.output.copy();
-    }
-
-    public int getCookTime() {
-        return this.cookTime;
-    }
-
-
-
-    @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
-        return pWidth * pHeight >= this.inputItems.size();
+        return output.copy();
     }
 
     @Override
@@ -122,43 +80,50 @@ public class BrickOvenRecipe implements Recipe<RecipeWrapper> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipeSerializers.BRICK_OVEN_SERIALIZER.get();
+        return Serializer.INSTANCE;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return ModRecipeTypes.BRICK_OVEN_COOKING.get();
+        return Type.INSTANCE;
     }
 
-    @Override
-    public ItemStack getToastSymbol() {
-        return new ItemStack(ModItems.BRICK_OVEN.get());
+    public static class Type implements RecipeType<BrickOvenRecipe> {
+        private Type() { }
+        public static final Type INSTANCE = new Type();
+        public static final String ID = "brick_oven_cooking";
     }
 
 
     public static class Serializer implements RecipeSerializer<BrickOvenRecipe> {
-        public Serializer() {
-        }
+        public static final Serializer INSTANCE = new Serializer();
+        public static final ResourceLocation ID =
+                new ResourceLocation(Pankers_Cuisine.MOD_ID, "brick_oven_cooking");
 
         @Override
-        public BrickOvenRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            final String groupIn = GsonHelper.getAsString(json, "group", "");
-            final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(json, "ingredients"));
+        public BrickOvenRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+            /*
+            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"));
+
+            JsonArray ingredients = GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients");
+            NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
+
+            for (int i = 0; i < inputs.size(); i++) {
+                inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
+            }
+
+             */
+
+            final NonNullList<Ingredient> inputItemsIn = readIngredients(GsonHelper.getAsJsonArray(pSerializedRecipe, "ingredients"));
             if (inputItemsIn.isEmpty()) {
                 throw new JsonParseException("No ingredients for cooking recipe");
             } else if (inputItemsIn.size() > BrickOvenRecipe.INPUT_SLOTS) {
                 throw new JsonParseException("Too many ingredients for cooking recipe! The max is " + BrickOvenRecipe.INPUT_SLOTS);
             } else {
-                final String tabKeyIn = GsonHelper.getAsString(json, "recipe_book_tab", null);
-                final BrickOvenRecipeBookTab tabIn = BrickOvenRecipeBookTab.findByName(tabKeyIn);
-                if (tabKeyIn != null && tabIn == null) {
-                    Pankers_Cuisine.LOGGER.warn("Optional field 'recipe_book_tab' does not match any valid tab. If defined, must be one of the following: " + EnumSet.allOf(BrickOvenRecipeBookTab.class));
-                }
-                final ItemStack outputIn = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
-                ItemStack container = GsonHelper.isValidNode(json, "container") ? CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "container"), true) : ItemStack.EMPTY;
-                final float experienceIn = GsonHelper.getAsFloat(json, "experience", 0.0F);
-                final int cookTimeIn = GsonHelper.getAsInt(json, "cookingtime", 200);
-                return new BrickOvenRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+                final ItemStack outputIn = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(pSerializedRecipe, "output"), true);
+                //final float experienceIn = GsonHelper.getAsFloat(pSerializedRecipe, "experience", 0.0F);
+                //final int cookTimeIn = GsonHelper.getAsInt(pSerializedRecipe, "cookingtime", 200);
+                return new BrickOvenRecipe(pRecipeId, outputIn, inputItemsIn);
             }
         }
 
@@ -175,39 +140,26 @@ public class BrickOvenRecipe implements Recipe<RecipeWrapper> {
             return nonnulllist;
         }
 
-        @Nullable
         @Override
-        public BrickOvenRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            String groupIn = buffer.readUtf();
-            BrickOvenRecipeBookTab tabIn = BrickOvenRecipeBookTab.findByName(buffer.readUtf());
-            int i = buffer.readVarInt();
-            NonNullList<Ingredient> inputItemsIn = NonNullList.withSize(i, Ingredient.EMPTY);
+        public @Nullable BrickOvenRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+            NonNullList<Ingredient> inputs = NonNullList.withSize(buf.readInt(), Ingredient.EMPTY);
 
-            for (int j = 0; j < inputItemsIn.size(); ++j) {
-                inputItemsIn.set(j, Ingredient.fromNetwork(buffer));
+            for (int i = 0; i < inputs.size(); i++) {
+                inputs.set(i, Ingredient.fromNetwork(buf));
             }
 
-            ItemStack outputIn = buffer.readItem();
-            ItemStack container = buffer.readItem();
-            float experienceIn = buffer.readFloat();
-            int cookTimeIn = buffer.readVarInt();
-            return new BrickOvenRecipe(recipeId, groupIn, tabIn, inputItemsIn, outputIn, container, experienceIn, cookTimeIn);
+            ItemStack output = buf.readItem();
+            return new BrickOvenRecipe(id, output, inputs);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, BrickOvenRecipe recipe) {
-            buffer.writeUtf(recipe.group);
-            buffer.writeUtf(recipe.tab != null ? recipe.tab.toString() : "");
-            buffer.writeVarInt(recipe.inputItems.size());
+        public void toNetwork(FriendlyByteBuf buf, BrickOvenRecipe recipe) {
+            buf.writeInt(recipe.getIngredients().size());
 
-            for (Ingredient ingredient : recipe.inputItems) {
-                ingredient.toNetwork(buffer);
+            for (Ingredient ing : recipe.getIngredients()) {
+                ing.toNetwork(buf);
             }
-
-            buffer.writeItem(recipe.output);
-            buffer.writeItem(recipe.container);
-            buffer.writeFloat(recipe.experience);
-            buffer.writeVarInt(recipe.cookTime);
+            buf.writeItemStack(recipe.getResultItem(), false);
         }
     }
 }

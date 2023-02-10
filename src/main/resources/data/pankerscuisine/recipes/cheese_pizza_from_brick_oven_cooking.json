@@ -1,0 +1,17 @@
+{
+  "type": "pankerscuisine:brick_oven_cooking",
+  "ingredients": [
+    {
+      "item": "pankerscuisine:cheese"
+    },
+    {
+      "item": "pankerscuisine:dough"
+    },
+    {
+      "item": "pankerscuisine:tomato"
+    }
+  ],
+  "output": {
+    "item": "pankerscuisine:cheese_pizza_whole"
+  }
+}

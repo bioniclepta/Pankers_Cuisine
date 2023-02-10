@@ -1,8 +1,8 @@
 package com.panker.pankerscuisine.integration;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
+import com.panker.pankerscuisine.common.registry.ModRecipes;
 import com.panker.pankerscuisine.data.recipe.BrickOvenRecipe;
-import com.panker.pankerscuisine.common.registry.ModRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
@@ -35,8 +35,8 @@ public class JEIPankersCuisinePlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
 
-        List<BrickOvenRecipe> recipesCooking = rm.getAllRecipesFor(ModRecipeTypes.BRICK_OVEN_COOKING.get());
-        registration.addRecipes(COOKING_TYPE, recipesCooking);
+        List<BrickOvenRecipe> recipesBrickOven = rm.getAllRecipesFor(BrickOvenRecipe.Type.INSTANCE);
+        registration.addRecipes(COOKING_TYPE, recipesBrickOven);
     }
 }
 
