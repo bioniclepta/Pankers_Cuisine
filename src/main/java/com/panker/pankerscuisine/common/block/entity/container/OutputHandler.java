@@ -12,11 +12,11 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class BrickOvenOutputHandler extends SlotItemHandler {
+public class OutputHandler extends SlotItemHandler {
 
     private int removeCount;
 
-    public BrickOvenOutputHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+    public OutputHandler(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
         super(itemHandler, index, xPosition, yPosition);
     }
 

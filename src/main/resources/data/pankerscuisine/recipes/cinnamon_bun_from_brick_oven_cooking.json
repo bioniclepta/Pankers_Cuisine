@@ -3,6 +3,9 @@
   "ingredients": [
     {
       "item": "pankerscuisine:cinnamon_bun_raw"
+    },
+    {
+      "item": "minecraft:sugar"
     }
   ],
   "output": {

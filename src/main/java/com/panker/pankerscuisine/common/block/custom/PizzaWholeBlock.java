@@ -87,7 +87,7 @@ public class PizzaWholeBlock extends HorizontalDirectionalBlock {
 
         if(heldStack.is(ModTags.PIZZACUTTERS)) {
 
-            for(var i = 0; i < 12; i++) {
+            for(var i = 0; i < 8; i++) {
                 popResource(level, pos, getCloneItemStack(level, pos, state));
             }
 

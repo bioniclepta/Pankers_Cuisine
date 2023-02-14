@@ -1,10 +1,7 @@
 package com.panker.pankerscuisine.common.registry;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.common.block.custom.BrickOvenBlock;
-import com.panker.pankerscuisine.common.block.custom.LettuceCropBlock;
-import com.panker.pankerscuisine.common.block.custom.PizzaWholeBlock;
-import com.panker.pankerscuisine.common.block.custom.TomatoCropBlock;
+import com.panker.pankerscuisine.common.block.custom.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -36,6 +33,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BRICK_OVEN_BLOCK = BLOCKS.register("brick_oven_block",
             () -> new BrickOvenBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).noOcclusion()));
+    public static final RegistryObject<Block> DISTILLERY_BLOCK = BLOCKS.register("distillery_block",
+            () -> new DistilleryBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).noOcclusion()));
 
     // Crop Blocks

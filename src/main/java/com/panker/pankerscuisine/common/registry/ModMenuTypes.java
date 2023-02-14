@@ -2,6 +2,7 @@ package com.panker.pankerscuisine.common.registry;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
 import com.panker.pankerscuisine.common.block.entity.container.BrickOvenMenu;
+import com.panker.pankerscuisine.common.block.entity.container.DistilleryMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
@@ -17,6 +18,8 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<BrickOvenMenu>> BRICK_OVEN_MENU =
             registerMenuType(BrickOvenMenu::new, "brick_oven_menu");
+    public static final RegistryObject<MenuType<DistilleryMenu>> DISTILLERY_MENU =
+            registerMenuType(DistilleryMenu::new, "distillery_menu");
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory,
                                                                                                   String name) {

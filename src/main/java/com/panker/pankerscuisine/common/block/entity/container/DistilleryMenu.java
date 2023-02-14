@@ -1,7 +1,7 @@
 package com.panker.pankerscuisine.common.block.entity.container;
 
+import com.panker.pankerscuisine.common.block.entity.DistilleryBlockEntity;
 import com.panker.pankerscuisine.common.registry.ModBlocks;
-import com.panker.pankerscuisine.common.block.entity.BrickOvenBlockEntity;
 import com.panker.pankerscuisine.common.registry.ModMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,21 +13,21 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class BrickOvenMenu extends AbstractContainerMenu {
-    public final BrickOvenBlockEntity blockEntity;
+public class DistilleryMenu extends AbstractContainerMenu {
+    public final DistilleryBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    private static int CONTAINERSLOTS = 8;
+    private static final int CONTAINERSLOTS = 2;
 
-    public BrickOvenMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
-        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(CONTAINERSLOTS-1));
+    public DistilleryMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
+        this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(CONTAINERSLOTS));
     }
 
-    public BrickOvenMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.BRICK_OVEN_MENU.get(), id);
+    public DistilleryMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.DISTILLERY_MENU.get(), id);
         checkContainerSize(inv, CONTAINERSLOTS);
-        blockEntity = (BrickOvenBlockEntity) entity;
+        blockEntity = (DistilleryBlockEntity) entity;
         this.level = inv.player.level;
         this.data = data;
 
@@ -35,15 +35,9 @@ public class BrickOvenMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 26, 17));
-            this.addSlot(new SlotItemHandler(handler, 1, 44, 17));
-            this.addSlot(new SlotItemHandler(handler, 2, 62, 17));
-            this.addSlot(new SlotItemHandler(handler, 3, 26, 35));
-            this.addSlot(new SlotItemHandler(handler, 4, 44, 35));
-            this.addSlot(new SlotItemHandler(handler, 5, 62, 35));
-            this.addSlot(new SlotItemHandler(handler, 6, 89, 63));
+            this.addSlot(new SlotItemHandler(handler, 0, 27, 27));
 
-            this.addSlot(new OutputHandler(handler, 7, 122,27));
+            this.addSlot(new OutputHandler(handler, 1, 131,27));
         });
 
         addDataSlots(data);
@@ -56,7 +50,7 @@ public class BrickOvenMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1);  // Max Progress
-        int progressArrowSize = 22; // This is the length in pixels of your arrow
+        int progressArrowSize = 34; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -118,7 +112,7 @@ public class BrickOvenMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, ModBlocks.BRICK_OVEN_BLOCK.get());
+                player, ModBlocks.DISTILLERY_BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

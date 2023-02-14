@@ -1,0 +1,11 @@
+{
+  "type": "pankerscuisine:distilling",
+  "ingredients": [
+    {
+      "item": "pankerscuisine:cheese"
+    }
+  ],
+  "output": {
+    "item": "minecraft:diamond"
+  }
+}
