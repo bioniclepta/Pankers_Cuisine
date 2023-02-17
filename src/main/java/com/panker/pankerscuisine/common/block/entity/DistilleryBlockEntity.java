@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,9 +42,18 @@ public class DistilleryBlockEntity extends BlockEntity implements MenuProvider {
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
+    //1 second is 20 ticks
+    //1 day is 24000 ticks
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 1000;
+    private int day1 = 24000;
+    private int day2 = day1 * 2;
+    private int day3 = day1 * 3;
+    private int day4 = day1 * 4;
+    private int day5 = day1 * 5;
+    private int day6 = day1 * 6;
+    private int day7 = day1 * 7;
+    private int maxProgress = day7;
 
     public DistilleryBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DISTILLERY_TILE_ENTITY.get(), pos, state);
@@ -133,13 +143,13 @@ public class DistilleryBlockEntity extends BlockEntity implements MenuProvider {
             return;
         }
 
-        if(hasRecipe(pEntity)) {
+        if(hasRecipe(pEntity) || pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT).getDamageValue() > 0) {
             pEntity.progress++;
             setChanged(level, pos, state);
-
-            if(pEntity.progress >= pEntity.maxProgress) {
-                craftItem(pEntity);
-            }
+            brewItem(pEntity);
+            //if(pEntity.progress >= pEntity.maxProgress) {
+            //    brewItem(pEntity);
+            //}
         } else {
             pEntity.resetProgress();
             setChanged(level, pos, state);
@@ -150,22 +160,41 @@ public class DistilleryBlockEntity extends BlockEntity implements MenuProvider {
         this.progress = 0;
     }
 
-    private static void craftItem(DistilleryBlockEntity pEntity) {
+    private static void brewItem(DistilleryBlockEntity pEntity) {
         Level level = pEntity.level;
         SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+        ItemStack output_brew = pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT);
         for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
         Optional<DistilleryRecipe> recipe = level.getRecipeManager()
                 .getRecipeFor(DistilleryRecipe.Type.INSTANCE, inventory, level);
-        //FIX TO HANDLE ITEMS AND BUCKETS
+
         if(hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(0, 1, false);
+            pEntity.itemHandler.setStackInSlot(0, new ItemStack(Items.BUCKET, 1));
+
 
             pEntity.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 1));
+                    pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 4));
 
+            output_brew = pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT);
+
+            output_brew.setDamageValue(7);
+
+        } else if(output_brew.isRepairable() && output_brew.getDamageValue() > 0) {
+            switch (pEntity.progress) {
+                case 24000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 48000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 72000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 96000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 120000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 144000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+                case 168000: output_brew.setDamageValue(Math.max(0, output_brew.getDamageValue() - 1));
+            }
+
+        } else if(!output_brew.isRepairable() || output_brew.getDamageValue() == 0) {
             pEntity.resetProgress();
         }
     }

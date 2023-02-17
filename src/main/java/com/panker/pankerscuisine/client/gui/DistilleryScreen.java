@@ -46,6 +46,14 @@ public class DistilleryScreen extends AbstractContainerScreen<DistilleryMenu> {
     private void renderProgressArrow(PoseStack pPoseStack, int x, int y) {
         if(menu.isCrafting()) {
             int scaled = menu.getScaledProgress();
+
+            if(scaled < 24000 * 2 && scaled >= 24000){scaled -= 24000;}
+            else if(scaled < 24000 * 3 && scaled >= 24000 * 2){scaled -= 24000 * 2;}
+            else if(scaled < 24000 * 4 && scaled >= 24000 * 3){scaled -= 24000 * 3;}
+            else if(scaled < 24000 * 5 && scaled >= 24000 * 4){scaled -= 24000 * 4;}
+            else if(scaled < 24000 * 6 && scaled >= 24000 * 5){scaled -= 24000 * 5;}
+            else if(scaled < 24000 * 7 && scaled >= 24000 * 6){scaled -= 24000 * 6;}
+
             blit(pPoseStack, x + 64, y + 20 + 34 - scaled, 176, 34 - scaled, 37, scaled);
         }
     }

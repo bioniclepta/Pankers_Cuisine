@@ -2,10 +2,10 @@
   "type": "pankerscuisine:distilling",
   "ingredients": [
     {
-      "item": "pankerscuisine:cheese"
+      "item": "pankerscuisine:dragon_milk"
     }
   ],
   "output": {
-    "item": "minecraft:diamond"
+    "item": "pankerscuisine:tankard_of_dragons_milk"
   }
 }

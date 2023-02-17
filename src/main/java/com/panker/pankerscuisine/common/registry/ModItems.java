@@ -21,7 +21,7 @@ public class ModItems {
         return new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB);
     }
     public static Item.Properties brewItem() {
-        return new Item.Properties().craftRemainder(ModItems.TANKARD.get()).stacksTo(4).tab(Pankers_Cuisine.CREATIVE_TAB);
+        return new Item.Properties().craftRemainder(ModItems.TANKARD.get()).stacksTo(4).defaultDurability(7).tab(Pankers_Cuisine.CREATIVE_TAB);
     }
 
     public static final int BRIEF_DURATION = 600;    // 30 seconds
@@ -116,6 +116,9 @@ public class ModItems {
             () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)
                     .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
     public static final RegistryObject<Item> CINNAMON_BUN_RAW = ITEMS.register("cinnamon_bun_raw",
+            () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)
+                    .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+    public static final RegistryObject<Item> GARLIC = ITEMS.register("garlic",
             () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)
                     .food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
 
