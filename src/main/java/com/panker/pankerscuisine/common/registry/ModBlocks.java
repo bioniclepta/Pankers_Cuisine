@@ -37,6 +37,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> DISTILLERY_BLOCK = BLOCKS.register("distillery_block",
             () -> new DistilleryBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .strength(6f).noOcclusion()));
+    public static final RegistryObject<Block> FERMENTER_BLOCK = BLOCKS.register("fermenter_block",
+            () -> new FermenterBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .strength(6f).noOcclusion()));
 
     // Crop Blocks
     public static final RegistryObject<Block> TOMATO_CROP = BLOCKS.register("tomato_crop",

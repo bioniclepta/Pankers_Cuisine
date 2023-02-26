@@ -5,6 +5,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 public class ModTags {
@@ -23,6 +24,7 @@ public class ModTags {
 
     // Blocks that can transfer heat to cooking workstations, if directly above a heat source.
     public static final TagKey<Block> HEAT_CONDUCTORS = modBlockTag("heat_conductors");
+
 
     private static TagKey<Item> modItemTag(String path) {
         return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Pankers_Cuisine.MOD_ID + ":" + path));

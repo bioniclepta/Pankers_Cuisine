@@ -1,6 +1,5 @@
 package com.panker.pankerscuisine.common;
 
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 public class CommonSetup {
@@ -9,7 +8,6 @@ public class CommonSetup {
         event.enqueueWork(() -> {
         });
 
-        //ModAdvancements.register();
     }
 
 }

@@ -20,12 +20,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Pankers_Cuisine.MOD_ID)
 public class Pankers_Cuisine {
 
     public static final String MOD_ID = "pankerscuisine";
+    public static final String BREW_ID = "brew";
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -50,6 +52,7 @@ public class Pankers_Cuisine {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
+
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModVillagers.register(modEventBus);
@@ -58,6 +61,10 @@ public class Pankers_Cuisine {
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
 
+        //Registers all items in the catalyst list upon launch
+        CatalystList.init();
+
         MinecraftForge.EVENT_BUS.register(this);
     }
+
 }

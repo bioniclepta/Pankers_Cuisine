@@ -1,7 +1,7 @@
 package com.panker.pankerscuisine.common.registry;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
-import com.panker.pankerscuisine.common.item.DrinkableItem;
+import com.panker.pankerscuisine.common.item.brews.BrewItem;
 import com.panker.pankerscuisine.common.item.brews.TankardOfDragonsMilk;
 import com.panker.pankerscuisine.common.item.custom.DragonsMilkBucketItem;
 import com.panker.pankerscuisine.common.item.custom.PizzaCutterItem;
@@ -59,12 +59,15 @@ public class ModItems {
     public static final RegistryObject<Item> DRAGON_MILK = ITEMS.register("dragon_milk",
             () -> new DragonsMilkBucketItem(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB).stacksTo(1)));
 
+    public static final RegistryObject<Item> CUSTOM_BREW = ITEMS.register("custom_brew", BrewItem::new);
+
     //Block Items
     public static final RegistryObject<Item> BRICK_OVEN = ITEMS.register("brick_oven",
             () -> new BlockItem(ModBlocks.BRICK_OVEN_BLOCK.get(), basicItem()));
-    //Block Items
     public static final RegistryObject<Item> DISTILLERY = ITEMS.register("distillery",
             () -> new BlockItem(ModBlocks.DISTILLERY_BLOCK.get(), basicItem()));
+    public static final RegistryObject<Item> FERMENTER = ITEMS.register("fermenter",
+            () -> new BlockItem(ModBlocks.FERMENTER_BLOCK.get(), basicItem()));
 
     // Block item references
     public static final RegistryObject<Item> PEPPERONIPIZZAWHOLE = ITEMS.register("pepperoni_pizza_whole",
@@ -134,6 +137,8 @@ public class ModItems {
     public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds",
             () -> new ItemNameBlockItem(ModBlocks.LETTUCE_CROP.get(),
                     new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
+
+
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

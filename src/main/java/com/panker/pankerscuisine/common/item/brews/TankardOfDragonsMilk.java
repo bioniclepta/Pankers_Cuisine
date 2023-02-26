@@ -2,18 +2,26 @@ package com.panker.pankerscuisine.common.item.brews;
 
 import com.panker.pankerscuisine.common.item.DrinkableItem;
 import com.panker.pankerscuisine.common.registry.ModItems;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraftforge.common.extensions.IForgeItem;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
+import java.util.List;
 
 public class TankardOfDragonsMilk extends DrinkableItem implements IForgeItem {
     public TankardOfDragonsMilk(Properties properties) {
         super(properties);
     }
+
 
     private int multiplier = 1;
 
