@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "group": "pankerite_nugget",
+  "ingredient": {
+    "item": "pankerscuisine:raw_pankerite"
+  },
+  "result": "pankerscuisine:pankerite_nugget"
+}

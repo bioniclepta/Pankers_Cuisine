@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "pankerite_ingot",
+  "key": {
+    "#": {
+      "item": "pankerscuisine:pankerite_nugget"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "###",
+    "#D#",
+    "###"
+  ],
+  "result": {
+    "item": "pankerscuisine:pankerite_ingot"
+  }
+}

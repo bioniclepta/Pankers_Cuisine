@@ -12,6 +12,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ClientMod {
 
+
     @SubscribeEvent
     public void registerModels(final ModelEvent.RegisterGeometryLoaders evt) {
         evt.register(Pankers_Cuisine.BREW_ID, BrewLoader.INSTANCE);
@@ -21,11 +22,8 @@ public class ClientMod {
     public void registerTextures(final TextureStitchEvent.Pre evt) {
         TextureAtlas map = evt.getAtlas();
 
-        if (map.location() == InventoryMenu.BLOCK_ATLAS) {
-
-            for (ResourceLocation resourceLocation : PankersBrewSprites.get()) {
-                evt.addSprite(resourceLocation);
-            }
+        for (ResourceLocation resourceLocation : PankersBrewSprites.get()) {
+            evt.addSprite(resourceLocation);
         }
     }
 }

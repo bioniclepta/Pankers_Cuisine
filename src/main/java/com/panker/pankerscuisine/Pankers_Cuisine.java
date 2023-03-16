@@ -3,6 +3,7 @@ package com.panker.pankerscuisine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.logging.LogUtils;
+import com.panker.pankerscuisine.client.ClientMod;
 import com.panker.pankerscuisine.common.registry.*;
 import com.panker.pankerscuisine.client.ClientSetup;
 import com.panker.pankerscuisine.common.CommonSetup;
@@ -11,8 +12,10 @@ import com.panker.pankerscuisine.common.painting.ModPaintings;
 import com.panker.pankerscuisine.villager.ModVillagers;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -61,8 +64,6 @@ public class Pankers_Cuisine {
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
 
-        //Registers all items in the catalyst list upon launch
-        CatalystList.init();
 
         MinecraftForge.EVENT_BUS.register(this);
     }

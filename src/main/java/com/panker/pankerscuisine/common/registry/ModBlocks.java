@@ -2,13 +2,17 @@ package com.panker.pankerscuisine.common.registry;
 
 import com.panker.pankerscuisine.Pankers_Cuisine;
 import com.panker.pankerscuisine.common.block.custom.*;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -46,6 +50,12 @@ public class ModBlocks {
             () -> new TomatoCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
     public static final RegistryObject<Block> LETTUCE_CROP = BLOCKS.register("lettuce_crop",
             () -> new LettuceCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT)));
+
+    //Ores
+    public static final RegistryObject<Block> DEEPSLATE_PANKERITE = registerBlock("deepslate_pankerite",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+                    UniformInt.of(6, 14)), Pankers_Cuisine.CREATIVE_TAB);
 
 
 

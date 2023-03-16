@@ -10,9 +10,7 @@ public class PankersBrewSprites {
     public static Set<ResourceLocation> get() {
         Set<ResourceLocation> result = new HashSet<>();
         result.add(
-                new ResourceLocation(Pankers_Cuisine.MOD_ID, "item/food_bowl/liquid_base"));
-        result.add(
-                new ResourceLocation(Pankers_Cuisine.MOD_ID, "item/food_bowl/liquid_overflow"));
+                new ResourceLocation(Pankers_Cuisine.MOD_ID, "item/food_bowl/brew_contents"));
         return result;
     }
 }

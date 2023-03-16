@@ -5,6 +5,8 @@ import com.panker.pankerscuisine.common.item.brews.BrewItem;
 import com.panker.pankerscuisine.common.item.brews.TankardOfDragonsMilk;
 import com.panker.pankerscuisine.common.item.custom.DragonsMilkBucketItem;
 import com.panker.pankerscuisine.common.item.custom.PizzaCutterItem;
+import com.panker.pankerscuisine.common.item.tools.Pankerite_Pickaxe;
+import com.panker.pankerscuisine.data.ModTiers;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -49,8 +51,19 @@ public class ModItems {
     public static final RegistryObject<Item> PIZZACUTTER = ITEMS.register("pizzacutter",
             () -> new PizzaCutterItem(Tiers.IRON, 0.5f, -2.0f,
                     new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
+    public static final RegistryObject<Item> PANKERITE_PICKAXE = ITEMS.register("pankerite_pickaxe",
+            () -> new Pankerite_Pickaxe(ModTiers.PANKERITE, 1, -2.8F,
+                    new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
     public static final RegistryObject<Item> TANKARD = ITEMS.register("tankard",
             () -> new Item(new Item.Properties().stacksTo(16).tab(Pankers_Cuisine.CREATIVE_TAB)));
+
+    //Ingots
+    public static final RegistryObject<Item> PANKERITE_INGOT = ITEMS.register("pankerite_ingot",
+            () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
+    public static final RegistryObject<Item> PANKERITE_NUGGET = ITEMS.register("pankerite_nugget",
+            () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
+    public static final RegistryObject<Item> RAW_PANKERITE = ITEMS.register("raw_pankerite",
+            () -> new Item(new Item.Properties().tab(Pankers_Cuisine.CREATIVE_TAB)));
 
     //Brews
     public static final RegistryObject<Item> TANKARD_OF_DRAGONS_MILK = ITEMS.register("tankard_of_dragons_milk",

@@ -74,6 +74,7 @@ public class BrewGeometry implements IUnbakedGeometry<BrewGeometry> {
     public BakedModel bake(IGeometryBakingContext context, ModelBakery bakery,
                            Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState,
                            ItemOverrides overrides, ResourceLocation modelLocation) {
+        System.out.println("Working to bake");
         TextureAtlasSprite baseSprite = spriteGetter.apply(context.getMaterial("bowl"));
         StandaloneGeometryBakingContext itemContext =
                 StandaloneGeometryBakingContext.builder(context).withGui3d(false).withUseBlockLight(false)
@@ -103,7 +104,7 @@ public class BrewGeometry implements IUnbakedGeometry<BrewGeometry> {
             boolean isOpaque = !opaqueColors.isEmpty();
             int liquidColor = isOpaque ? ColorMixer.getMixedColor(this.liquids)
                     : ColorMixer.getMixedColor(ingredientColors);
-            TextureAtlasSprite sprite = spriteGetter.apply(context.getMaterial("liquid_base"));
+            TextureAtlasSprite sprite = spriteGetter.apply(context.getMaterial("brew_contents"));
             unbaked = UnbakedGeometryHelper.createUnbakedItemElements(0, sprite);
             quads = UnbakedGeometryHelper.bakeElements(unbaked, material -> sprite, modelState,
                     modelLocation);
@@ -139,12 +140,9 @@ public class BrewGeometry implements IUnbakedGeometry<BrewGeometry> {
                                              Function<ResourceLocation, UnbakedModel> modelGetter,
                                              Set<Pair<String, String>> missingTextureErrors) {
         Set<Material> textures = new HashSet<>();
-
-        for (int i = 0; i < 5; i++) {
-            textures.add(context.getMaterial("layer" + i));
-        }
-        textures.add(context.getMaterial("liquid_base"));
-        textures.add(context.getMaterial("liquid_overflow"));
+        System.out.println("getting materials");
+        
+        textures.add(context.getMaterial("brew_contents"));
         textures.add(context.getMaterial("bucket"));
         return textures;
     }
@@ -162,6 +160,7 @@ public class BrewGeometry implements IUnbakedGeometry<BrewGeometry> {
         @Override
         protected BakedModel getBakedModel(BakedModel originalModel, ItemStack stack,
                                            @Nullable Level world, @Nullable LivingEntity entity) {
+            System.out.println("getting baked model");
             BrewGeometry unbaked = this.model.withStack(stack);
             return unbaked.bake(this.context, this.bakery, this.spriteGetter, this.modelState,
                     this, new ResourceLocation(Pankers_Cuisine.MOD_ID,

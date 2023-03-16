@@ -20,9 +20,15 @@
   "item.pankerscuisine.garlic": "Garlic",
   "item.pankerscuisine.pizzacutter": "Pizza Cutter",
 
+  "item.pankerscuisine.pankerite_ingot": "Pankerite Ingot",
+  "item.pankerscuisine.pankerite_nugget": "Pankerite Nugget",
+  "item.pankerscuisine.raw_pankerite": "Raw Pankerite",
+
   "item.pankerscuisine.dragon_milk": "Dragon's Milk",
+  "item.pankerscuisine.custom_brew": "Empty Brew",
   "item.pankerscuisine.tankard": "Empty Tankard",
   "item.pankerscuisine.tankard_of_dragons_milk": "Tankard of Dragons Milk",
+  "item.pankerscuisine.pankerite_pickaxe": "Pankerite Pickaxe",
 
   "block.pankerscuisine.pepperoni_pizza_whole_block": "Pepperoni Pizza",
   "block.pankerscuisine.cheese_pizza_whole_block": "Cheese Pizza",
@@ -32,6 +38,8 @@
   "block.pankerscuisine.fermenter_block": "Fermenter",
   "block.pankerscuisine.lettuce_crop": "Lettuce Crop",
   "block.pankerscuisine.tomato_crop": "Tomato Crop",
+  "block.pankerscuisine.deepslate_pankerite": "Deepslate Pankerite Ore",
+
 
 
   "itemGroup.pankerscuisine": "Panker's Cuisine",

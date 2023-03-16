@@ -1,6 +1,7 @@
 package com.panker.pankerscuisine.common.block.entity.container;
 
 import com.panker.pankerscuisine.common.block.entity.FermenterBlockEntity;
+import com.panker.pankerscuisine.common.registry.CatalystList;
 import com.panker.pankerscuisine.common.registry.ModBlocks;
 import com.panker.pankerscuisine.common.registry.ModMenuTypes;
 import com.panker.pankerscuisine.common.utility.BrewSetter;
@@ -11,19 +12,20 @@ import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.SlotItemHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.*;
 
 public class FermenterMenu extends AbstractContainerMenu {
     public final FermenterBlockEntity blockEntity;
@@ -33,7 +35,8 @@ public class FermenterMenu extends AbstractContainerMenu {
     private String outputItemName;
 
     private static final int CONTAINERSLOTS = 6;
-    private static final int OUTPUT_SLOT = 4;
+    private static final int OUTPUT_SLOT = 5;
+    private static final int DISPLAY_SLOT = 4;
 
     public FermenterMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         this(id, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(CONTAINERSLOTS-1), null);
@@ -49,6 +52,8 @@ public class FermenterMenu extends AbstractContainerMenu {
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
+        //Registers all items in the catalyst list upon placing block
+        CatalystList.init();
 
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
@@ -58,7 +63,7 @@ public class FermenterMenu extends AbstractContainerMenu {
             this.addSlot(new FermenterSlot(handler, 2, 15, 34));
             this.addSlot(new FermenterSlot(handler, 3, 15, 52));
 
-            this.addSlot(new OutputHandler(handler, 4, 86,11));
+            this.addSlot(new DisplaySlot(handler, 4, 86,11));
             this.addSlot(new OutputHandler(handler, 5, 140,34));
         });
 
@@ -165,49 +170,49 @@ public class FermenterMenu extends AbstractContainerMenu {
         }
     }
 
-    private void setDisplay(ItemStack stack) {
-        blockEntity.setItem(OUTPUT_SLOT, stack);
-        this.broadcastChanges();
-    }
-
     private void setOutput(ItemStack stack) {
-        blockEntity.itemHandler.setStackInSlot(OUTPUT_SLOT + 1, stack);
+        blockEntity.itemHandler.setStackInSlot(OUTPUT_SLOT, stack);
         this.broadcastChanges();
     }
 
-    private void resetOutput() {
-        ItemStack stack = blockEntity.itemHandler.getStackInSlot(OUTPUT_SLOT);
+    private void setDisplay(ItemStack stack) {
+        blockEntity.itemHandler.setStackInSlot(DISPLAY_SLOT, stack);
+        this.broadcastChanges();
+    }
+
+    private void resetDisplay() {
+        ItemStack stack = blockEntity.itemHandler.getStackInSlot(DISPLAY_SLOT);
 
         if (!stack.isEmpty()) {
-            this.setOutput(ItemStack.EMPTY);
+            this.setDisplay(ItemStack.EMPTY);
         }
     }
 
     public void updateOutput() {
         ItemStack baseStack = blockEntity.itemHandler.getStackInSlot(0);
 
-        if (baseStack.isEmpty()) {
-            System.out.println("Base Stack is empty, resetting output");
-            resetOutput();
+        if (baseStack.isEmpty() && !has_all_inputs()) {
+            resetDisplay();
             return;
         }
         NonNullList<ItemStack> ingredientsList = NonNullList.create();
 
-        for (int i = 1; i < OUTPUT_SLOT; i++) {
+        for (int i = 1; i < DISPLAY_SLOT; i++) {
             //ItemStack stack = this.container.getItem(i);
             ItemStack stack = blockEntity.itemHandler.getStackInSlot(i);
 
             if (!stack.isEmpty()) {
-                System.out.println("setting ingredient: " + stack.getItem().toString());
                 ItemStack copy = stack.copy();
                 copy.setCount(1);
                 ingredientsList.add(copy);
+            } else {
+                resetDisplay();
+                return;
             }
         }
 
         if (ingredientsList.isEmpty()) {
-            System.out.println("Ingredient list is empty, resetting output");
-            resetOutput();
+            resetDisplay();
             return;
         }
         ItemStack baseCopy = baseStack.copy();
@@ -216,25 +221,88 @@ public class FermenterMenu extends AbstractContainerMenu {
         ItemStack result = calculator.getResult();
 
         if (result.isEmpty()) {
-            System.out.println("result was empty");
-            resetOutput();
+            resetDisplay();
             return;
         }
 
-        updateItemName("Testing naming");
+        //Last check before updating item names...
+        if(has_all_inputs() && !result.isEmpty()) {
+            updateItemName(ingredientsList);
+        } else {
+            resetDisplay();
+        }
 
         if (StringUtils.isBlank(this.outputItemName)) {
             result.resetHoverName();
         } else if (!this.outputItemName.equals(result.getHoverName().getString())) {
             result.setHoverName(Component.literal(this.outputItemName));
         }
-        System.out.println("got down to updating the output");
-        setOutput(result);
+
+        setDisplay(result);
     }
 
-    public void updateItemName(String newName) {
-        this.outputItemName = newName;
-        //this.updateOutput();
+    public void updateItemName(NonNullList<ItemStack> ingredientsIn) {
+
+        Map<Item, Integer> itemCounts = new HashMap<>();
+        StringBuilder name = new StringBuilder();
+
+        for (ItemStack stack : ingredientsIn) {
+            Item item = stack.getItem();
+            if (!itemCounts.containsKey(item)) {
+                itemCounts.put(item, 1);
+            } else {
+                itemCounts.put(item, itemCounts.get(item) + 1);
+            }
+        }
+
+        boolean hasDuplicate = false;
+        boolean hasTriple = false;
+        String first_item = "";
+        String second_item = "";
+        for (Map.Entry<Item, Integer> entry : itemCounts.entrySet()) {
+            int count = entry.getValue();
+            Item item = entry.getKey();
+            if (count > 1) {
+                hasDuplicate = true;
+                second_item = item.toString().replace("_", " ");
+                if (count == 3) {
+                    hasTriple = true;
+                }
+            } else if (count == 1) {
+                first_item = item.toString().replace("_", " ");
+            }
+            name.append(item.toString().replace("_", " ")).append(" ");
+        }
+
+        if (hasDuplicate) {
+            if (hasTriple) {
+                name.insert(0, "Triple ");
+                this.outputItemName = toTitleCase(name.toString().trim()) + " Brew";
+            } else {
+                this.outputItemName = toTitleCase(first_item) + " Double " + toTitleCase(second_item) + " Brew";
+            }
+            return;
+        }
+        String final_name = name.toString().trim();
+        this.outputItemName = toTitleCase(final_name) + " Brew";
+    }
+
+    public static String toTitleCase(String givenString) {
+        String[] arr = givenString.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(Character.toUpperCase(arr[i].charAt(0)))
+                    .append(arr[i].substring(1)).append(" ");
+        }
+        return sb.toString().trim();
+    }
+
+    private boolean has_all_inputs() {
+        Item item1 = blockEntity.itemHandler.getStackInSlot(0).getItem();
+        Item item2 = blockEntity.itemHandler.getStackInSlot(0).getItem();
+        Item item3 = blockEntity.itemHandler.getStackInSlot(0).getItem();
+        return !(item1 == Items.AIR) && !(item2 == Items.AIR) && !(item3 == Items.AIR);
     }
 
     public class FermenterSlot extends SlotItemHandler {

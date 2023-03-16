@@ -1,9 +1,12 @@
 package com.panker.pankerscuisine.common.utility;
 
+import com.panker.pankerscuisine.Pankers_Cuisine;
 import com.panker.pankerscuisine.common.registry.CatalystList;
 import com.panker.pankerscuisine.common.registry.ModItems;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -25,6 +28,8 @@ public class BrewSetter {
     private int food;
     private float saturation;
     private int complexity;
+    private int multiplier;
+    private int complexity_mult;
 
     public BrewSetter(ItemStack baseIn, NonNullList<ItemStack> ingredientsIn) {
         this.base = baseIn;
@@ -37,22 +42,11 @@ public class BrewSetter {
         List<ItemStack> process = new ArrayList<>(this.ingredients);
         this.processed.clear();
         int maxFood;
-        System.out.println("get result called");
-
-        /*
-        if (this.base.getItem() == Items.BUCKET) {
-            process.add(this.base);
-        }
-        I think this is the problem by adding the bucket to the ingredient list
-         */
 
 
         for (ItemStack stack : process) {
             if (!stack.isEmpty()) {
-                System.out.println("Stack wasnt empty");
-                System.out.println("looping through the stack, found: " + stack.toString());
                 if (!this.processStack(stack)) {
-                    System.out.println("process stack failed");
                     return ItemStack.EMPTY;
                 }
             }
@@ -66,12 +60,13 @@ public class BrewSetter {
         this.saturation /= this.food;
         int count = 1;
 
-        this.food = (int) Math.ceil(this.food / (double) count);
-        int quality = Mth.clamp(this.complexity - (this.getSize() / 2) + 1, 0, 4);
-        this.saturation *= 1.0F + ((quality - 2) * 0.3F);
+        this.food = (int) Math.ceil((this.food / (double) count) + (double) multiplier);
+        int quality = Mth.clamp(this.complexity * (this.complexity_mult / 2), 1, 10);
+        this.saturation *= (1.0F * multiplier) + ((quality - 1) * 0.3F);
         /***********************************************************************/
 
         ItemStack result = new ItemStack(ModItems.CUSTOM_BREW.get());
+
 
         BrewNBT.setSize(result, this.getSize());
         BrewNBT.setIngredientsList(result, this.ingredients);
@@ -89,25 +84,21 @@ public class BrewSetter {
     public boolean processStack(ItemStack stack) {
         FoodProperties food = stack.getFoodProperties(null);
         Item stackItem = stack.getItem();
-        System.out.println("called processstack");
 
         int foodAmount = 0;
         float saturationAmount = 0;
         boolean valid = true;
 
         if (CatalystList.containsKey(stackItem)) {
-            System.out.println("found catalyst");
             CatalystProperties properties = CatalystList.getProperties(stackItem);
-            int multiplier = properties.getMultiplier();
-            int complexity = properties.getComplexity();
+            this.multiplier += properties.getMultiplier();
+            this.complexity_mult += properties.getComplexity();
             // do something with the properties
         } else if (food != null) {
-            System.out.println("food properties found");
             foodAmount = food.getNutrition();
             saturationAmount = food.getSaturationModifier();
             this.solids.add(stack);
         } else {
-            System.out.println("no food properties found");
             valid = false;
         }
 
@@ -129,7 +120,6 @@ public class BrewSetter {
             this.complexity++;
         }
         //Add a complexity modifier from non edible catalysts
-        System.out.println("final call");
         this.processed.add(stack);
         return true;
     }
