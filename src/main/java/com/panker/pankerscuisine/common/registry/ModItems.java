@@ -9,6 +9,7 @@ import com.panker.pankerscuisine.common.item.tools.Milkium_Tipped_Netherite_Pick
 import com.panker.pankerscuisine.common.item.tools.Pankerite_Pickaxe;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -159,6 +160,12 @@ public class ModItems {
                     new Item.Properties()));
     public static final RegistryObject<Item> LETTUCE_SEEDS = ITEMS.register("lettuce_seeds",
             () -> new ItemNameBlockItem(ModBlocks.LETTUCE_CROP.get(),
+                    new Item.Properties()));
+
+
+    //Spawn Eggs
+    public static final RegistryObject<Item> TACO_FOOD_TRUCK_SPAWN_EGG = ITEMS.register("taco_food_truck_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntityTypes.TACO_FOOD_TRUCK, 0xF8B602, 0xB9D982,
                     new Item.Properties()));
 
 

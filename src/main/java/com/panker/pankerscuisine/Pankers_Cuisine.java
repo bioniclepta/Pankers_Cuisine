@@ -56,6 +56,7 @@ public class Pankers_Cuisine {
         ModMenuTypes.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         GeckoLib.initialize();
 
@@ -79,6 +80,7 @@ public class Pankers_Cuisine {
             event.accept(ModItems.DRAGON_MILK);
             event.accept(ModItems.TANKARD_OF_DRAGONS_MILK);
             event.accept(ModItems.CUSTOM_BREW);
+            event.accept(ModItems.TACO_FOOD_TRUCK_SPAWN_EGG);
 
         }
         if(event.getTab() == ModCreativeModeTab.INGREDIENT_TAB) {
