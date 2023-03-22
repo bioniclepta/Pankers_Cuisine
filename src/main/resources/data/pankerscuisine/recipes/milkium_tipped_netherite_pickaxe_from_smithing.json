@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "pankerscuisine:milkium_crystal_cluster"
+  },
+  "base": {
+    "item": "minecraft:netherite_pickaxe"
+  },
+  "result": {
+    "item": "pankerscuisine:milkium_tipped_netherite_pickaxe"
+  }
+}

@@ -62,7 +62,7 @@ public class BrickOvenCookingRecipeCategory implements IRecipeCategory<BrickOven
 
          */
 
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 23).addItemStack(recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 23).addItemStack(recipe.getOutput());
 
         /*
         NonNullList<Ingredient> recipeIngredients = recipe.getIngredients();

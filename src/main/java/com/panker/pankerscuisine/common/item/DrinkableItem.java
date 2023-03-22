@@ -19,8 +19,7 @@ public class DrinkableItem extends ConsumableItem {
 
 
     public DrinkableItem() {
-        super(new Item.Properties().tab(CreativeModeTab.TAB_FOOD)
-                .food(new FoodProperties.Builder().nutrition(1).saturationMod(1.0f).build()));
+        super(new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationMod(1.0f).build()));
     }
 
     public DrinkableItem(Properties properties) {

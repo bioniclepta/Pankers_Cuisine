@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "milkium_crystal_cluster",
+  "key": {
+    "#": {
+      "item": "pankerscuisine:cut_milkium_crystal"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "pankerscuisine:milkium_crystal_cluster"
+  }
+}

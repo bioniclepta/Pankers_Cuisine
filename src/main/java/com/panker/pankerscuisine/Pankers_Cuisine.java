@@ -14,6 +14,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import software.bernie.geckolib.GeckoLib;
 
 import javax.annotation.Nonnull;
 import java.util.Locale;
@@ -35,15 +37,6 @@ public class Pankers_Cuisine {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
-    public static final CreativeModeTab CREATIVE_TAB = new CreativeModeTab(Pankers_Cuisine.MOD_ID)
-    {
-        @Nonnull
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(ModItems.CHEESEBURGER.get());
-        }
-    };
 
 
     public Pankers_Cuisine() {
@@ -64,8 +57,58 @@ public class Pankers_Cuisine {
         ModBlockEntities.register(modEventBus);
         ModRecipes.register(modEventBus);
 
+        GeckoLib.initialize();
+
+        modEventBus.addListener(this::addCreative);
+
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    private void addCreative(CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() == ModCreativeModeTab.CUISINE_TAB) {
+            event.accept(ModItems.CHEESEPIZZASLICE);
+            event.accept(ModItems.MARGHERITAPIZZASLICE);
+            event.accept(ModItems.PEPPERONIPIZZASLICE);
+            event.accept(ModItems.PEPPERONIPIZZAWHOLE);
+            event.accept(ModItems.CHEESEPIZZAWHOLE);
+            event.accept(ModItems.MARGHERITAPIZZAWHOLE);
+            event.accept(ModItems.CHEESEBURGER);
+            event.accept(ModItems.CINNAMON_BUN_COOKED);
+            event.accept(ModItems.CINNAMON_BUN_RAW);
+            event.accept(ModItems.DRAGON_MILK);
+            event.accept(ModItems.TANKARD_OF_DRAGONS_MILK);
+            event.accept(ModItems.CUSTOM_BREW);
+
+        }
+        if(event.getTab() == ModCreativeModeTab.INGREDIENT_TAB) {
+            event.accept(ModItems.CHEESE);
+            event.accept(ModItems.TOMATO);
+            event.accept(ModItems.TOMATO_SEEDS);
+            event.accept(ModItems.LETTUCE);
+            event.accept(ModItems.LETTUCE_SEEDS);
+            event.accept(ModItems.PATTY_COOKED);
+            event.accept(ModItems.PATTY_RAW);
+            event.accept(ModItems.GARLIC);
+            event.accept(ModItems.DOUGH);
+            event.accept(ModItems.TANKARD);
+        }
+        if(event.getTab() == ModCreativeModeTab.ORES_TAB) {
+            event.accept(ModItems.PANKERITE_PICKAXE);
+            event.accept(ModItems.MILKIUM_TIPPED_NETHERITE_PICKAXE);
+
+            event.accept(ModBlocks.DEEPSLATE_MILKIUM);
+            event.accept(ModBlocks.DEEPSLATE_PANKERITE);
+            event.accept(ModBlocks.THICCIUM_ORE);
+            event.accept(ModBlocks.END_TOADERITE_ORE);
+            event.accept(ModBlocks.NEHTER_KELVINITE_ORE);
+            event.accept(ModBlocks.DELICIERITE_ORE);
+            event.accept(ModItems.PANKERITE_INGOT);
+            event.accept(ModItems.PANKERITE_NUGGET);
+            event.accept(ModItems.RAW_PANKERITE);
+            event.accept(ModItems.RAW_MILKIUM);
+            event.accept(ModItems.CUT_MILKIUM_CRYSTAL);
+            event.accept(ModItems.MILKIUM_CRYSTAL_CLUSTER);
+        }
+    }
 }

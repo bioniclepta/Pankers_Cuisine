@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "pankerscuisine:deepslate_pankerite"
+    "pankerscuisine:deepslate_pankerite",
+    "pankerscuisine:delicierite_ore",
+    "pankerscuisine:thiccium_ore",
+    "pankerscuisine:deepslate_milkium",
+    "pankerscuisine:nether_kelvinite_ore",
+    "pankerscuisine:end_toaderite_ore"
   ]
 }

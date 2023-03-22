@@ -164,7 +164,7 @@ public class BrickOvenBlockEntity extends BlockEntity implements MenuProvider {
             pEntity.itemHandler.extractItem(3, 1, false);
             pEntity.itemHandler.extractItem(4, 1, false);
             pEntity.itemHandler.extractItem(5, 1, false);
-            pEntity.itemHandler.setStackInSlot(7, new ItemStack(recipe.get().getResultItem().getItem(),
+            pEntity.itemHandler.setStackInSlot(7, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
                     pEntity.itemHandler.getStackInSlot(7).getCount() + 1));
             //CHANGE TO NEW*************************
             pEntity.resetProgress();
@@ -183,7 +183,7 @@ public class BrickOvenBlockEntity extends BlockEntity implements MenuProvider {
 
 
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
+                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 
     //CHECK NEW

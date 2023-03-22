@@ -1,4 +1,4 @@
-package com.panker.pankerscuisine.data;
+package com.panker.pankerscuisine.common.registry;
 
 import com.panker.pankerscuisine.common.registry.ModItems;
 import net.minecraft.util.LazyLoadedValue;
@@ -10,6 +10,9 @@ import java.util.function.Supplier;
 public enum ModTiers implements Tier {
     PANKERITE(4, 2031/2, 10.0F, 4.0F, 18, () -> {
         return Ingredient.of(ModItems.PANKERITE_INGOT.get());
+    }),
+    MILKIUM(4, 2031*2, 9.0F, 4.0F, 18, () -> {
+        return Ingredient.of(ModItems.MILKIUM_CRYSTAL_CLUSTER.get());
     });
 
     private final int level;

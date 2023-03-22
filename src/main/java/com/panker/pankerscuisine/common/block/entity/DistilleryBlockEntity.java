@@ -176,7 +176,7 @@ public class DistilleryBlockEntity extends BlockEntity implements MenuProvider {
             pEntity.itemHandler.setStackInSlot(0, new ItemStack(Items.BUCKET, 1));
 
 
-            pEntity.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.get().getResultItem().getItem(),
+            pEntity.itemHandler.setStackInSlot(OUTPUT_SLOT, new ItemStack(recipe.get().getResultItem(level.registryAccess()).getItem(),
                     pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT).getCount() + 4));
 
             output_brew = pEntity.itemHandler.getStackInSlot(OUTPUT_SLOT);
@@ -211,7 +211,7 @@ public class DistilleryBlockEntity extends BlockEntity implements MenuProvider {
 
 
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) &&
-                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem());
+                canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem(level.registryAccess()));
     }
 
     //CHECK NEW

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "pankerscuisine:raw_milkium"
+  },
+  "result": "pankerscuisine:cut_milkium_crystal"
+}

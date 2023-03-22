@@ -53,23 +53,42 @@ public class ModBlocks {
 
     //Ores
     public static final RegistryObject<Block> DEEPSLATE_PANKERITE = registerBlock("deepslate_pankerite",
-            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(6f, 120)
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
                     .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
-                    UniformInt.of(6, 14)), Pankers_Cuisine.CREATIVE_TAB);
+                    UniformInt.of(6, 14)));
+    public static final RegistryObject<Block> DELICIERITE_ORE = registerBlock("delicierite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+                    UniformInt.of(6, 14)));
+    public static final RegistryObject<Block> THICCIUM_ORE = registerBlock("thiccium_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+                    UniformInt.of(6, 14)));
+    public static final RegistryObject<Block> DEEPSLATE_MILKIUM = registerBlock("deepslate_milkium",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+                    UniformInt.of(6, 14)));
+    public static final RegistryObject<Block> NEHTER_KELVINITE_ORE = registerBlock("nether_kelvinite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE),
+                    UniformInt.of(6, 14)));
+    public static final RegistryObject<Block> END_TOADERITE_ORE = registerBlock("end_toaderite_ore",
+            () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.METAL).strength(6f, 120)
+                    .requiresCorrectToolForDrops().sound(SoundType.STONE),
+                    UniformInt.of(6, 14)));
 
 
 
 
 
-    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
+    private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
-        registerBlockItem(name, toReturn, tab);
-
+        registerBlockItem(name, toReturn);
         return toReturn;
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
+    private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
+        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     public static void register(IEventBus eventBus) {

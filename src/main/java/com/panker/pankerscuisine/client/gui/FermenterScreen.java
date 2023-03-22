@@ -26,11 +26,13 @@ public class FermenterScreen extends AbstractContainerScreen<FermenterMenu> {
     protected void init() {
         int x = ((width - imageWidth) / 2) + 75;
         int y = ((height - imageHeight) / 2) + 55;
+        /*
         this.addRenderableWidget(new Button(x, y, 40, 16,
                 Component.literal("Brew"), (buttonWidget) -> {
             menu.setClicked();
-            System.out.println("Clicked");
         }));
+
+         */
         super.init();
     }
 
