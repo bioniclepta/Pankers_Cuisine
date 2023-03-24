@@ -81,6 +81,21 @@ public class Pankers_Cuisine {
             event.accept(ModItems.TANKARD_OF_DRAGONS_MILK);
             event.accept(ModItems.CUSTOM_BREW);
             event.accept(ModItems.TACO_FOOD_TRUCK_SPAWN_EGG);
+            event.accept(ModItems.MUSHROOM_MOLE_BURRITO);
+            event.accept(ModItems.BLAZING_HOT_BURRITO);
+            event.accept(ModItems.EMERALD_TACO);
+            event.accept(ModItems.DIAMOND_DUST_TACO);
+            event.accept(ModItems.CREEPER_CRUNCH_TACO);
+            event.accept(ModItems.CHARGED_CREEPER_CRUNCH_TACO);
+            event.accept(ModItems.GOLDEN_APPLE_TACO);
+            event.accept(ModItems.ENCHANTED_GOLDEN_APPLE_TACO);
+            event.accept(ModItems.REDSTONE_REFRIED_BEANS_TACO);
+            event.accept(ModItems.LAPIS_LAZULI_LETTUCE_WRAP);
+            event.accept(ModItems.GHASTLY_GUACAMOLE_TACO);
+            event.accept(ModItems.NETHERITE_NACHOS);
+            event.accept(ModItems.SWEETBERRY_SALSA);
+            event.accept(ModItems.HONEYCOMB_HABANERO_TACO);
+            event.accept(ModItems.CACTUS_CARNE_ASADA_TACO);
 
         }
         if(event.getTab() == ModCreativeModeTab.INGREDIENT_TAB) {

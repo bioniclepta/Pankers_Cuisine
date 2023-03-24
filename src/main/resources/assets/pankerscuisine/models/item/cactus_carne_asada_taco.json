@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "pankerscuisine:item/cactus_carne_asada_taco"
+  }
+}

@@ -52,8 +52,25 @@
   "block.pankerscuisine.lettuce_crop": "Lettuce Crop",
   "block.pankerscuisine.tomato_crop": "Tomato Crop",
 
+  "item.pankerscuisine.mushroom_mole_burrito": "Mushroom Mole Burrito",
+  "item.pankerscuisine.blazing_hot_burrito": "Blazing Hot Burrito",
+  "item.pankerscuisine.creeper_crunch_taco": "Creeper Crunch Taco",
+  "item.pankerscuisine.charged_creeper_crunch_taco": "Charged Creeper Crunch Taco",
+  "item.pankerscuisine.diamond_dust_taco": "Diamond Dust Taco",
+  "item.pankerscuisine.emerald_taco": "Emerald Taco",
+  "item.pankerscuisine.golden_apple_taco": "Golden Apple Taco",
+  "item.pankerscuisine.enchanted_golden_apple_taco": "Enchanted Golden Apple Taco",
+  "item.pankerscuisine.redstone_refried_beans_taco": "Redstone Refried Beans Taco",
+  "item.pankerscuisine.lapis_lazuli_lettuce_wrap": "Lapis Lazuli Lettuce Wrap",
+  "item.pankerscuisine.ghastly_guacamole_taco": "Ghastly Guacamole Taco",
+  "item.pankerscuisine.netherite_nachos": "Netherite Nachos",
+  "item.pankerscuisine.sweetberry_salsa": "Sweetberry Salsa",
+  "item.pankerscuisine.honeycomb_habanero_taco": "Honeycomb Habanero Taco",
+  "item.pankerscuisine.cactus_carne_asada_taco": "Cactus Carne Asada Taco",
+
 
 
   "itemGroup.pankerscuisine": "Panker's Cuisine",
-  "entity.minecraft.villager.pankerscuisine.master_chef": "Master Chef"
+  "entity.minecraft.villager.pankerscuisine.master_chef": "Master Chef",
+  "entity.pankerscuisine.taco_food_truck": "Taco Truck"
 }
